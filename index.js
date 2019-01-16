@@ -2,6 +2,10 @@ require('appoptics-apm')
 
 const Koa = require('koa')
 const Router = require('koa-router')
+const jwt = require('koa-jwt')
+const { ApolloServer } = require('apollo-server-koa')
+
+const schema = require('./data/schema')
 
 const app = new Koa()
 const router = new Router()
@@ -21,6 +25,24 @@ router.get('/bar', async (ctx) => {
   ctx.body = 'you are barred'
 })
 
+app.use(jwt({
+  secret: 'secret',
+  passthrough: true
+}))
+
+const publicServer = new ApolloServer({
+  schema,
+  context: ({ ctx }) => {
+    console.log('ctx', ctx)
+    return {}
+  }
+})
+publicServer.applyMiddleware({
+  app
+})
+
 app.use(router.routes())
+app.use(router.allowedMethods())
+
 
 app.listen(3333)

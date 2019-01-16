@@ -4,8 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "apollo-server-koa": "^2.3.1",
+    "appoptics-apm": "https://github.com/chooban/appoptics-apm-node",
+    "graphql": "^14.0.2",
+    "graphql-tools": "^4.0.3",
     "koa": "^2.6.2",
-    "koa-router": "^7.4.0",
-    "appoptics-apm": "git://github.com/chooban/appoptics-apm-node.git#master"
+    "koa-jwt": "^3.5.1",
+    "koa-router": "^7.4.0"
   }
 }
